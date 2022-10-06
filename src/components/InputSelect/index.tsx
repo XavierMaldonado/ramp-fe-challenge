@@ -57,6 +57,7 @@ export function InputSelect<TItem>({
             </label>
             <div className="RampBreak--xs" />
             <div
+              id="menuContainer"
               className="RampInputSelect--input"
               onClick={(event) => {
                 setDropdownPosition(getDropdownPosition(event.target))
@@ -119,14 +120,12 @@ export function InputSelect<TItem>({
 
 const getDropdownPosition: GetDropdownPositionFn = (target) => {
   if (target instanceof Element) {
-    const menuPos = target.getBoundingClientRect()
-    var rect = target.getBoundingClientRect();
-    console.log(rect.top, rect.right, rect.bottom, rect.left);
-    //const { top, left } = target.getBoundingClientRect()
-    //const { scrollY } = window
+    //const menuPos = parent.getBoundingClientRect()
+    var { top, left } = target.getBoundingClientRect()
+    //var { scrollY } = window
     return {
-      left: menuPos.left + window.scrollX,
-      top: menuPos.top + window.scrollY,
+      left: left * window.scrollX,
+      top: top * window.scrollY,
     }
   }
 
